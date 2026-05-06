@@ -13,5 +13,18 @@ export class InfraStack extends cdk.Stack {
       ipAddresses: ec2.IpAddresses.cidr("10.0.0.0/16"),
       natGateways: 0,
     });
+
+    //Security Group
+    const demoSG = new ec2.SecurityGroup(this, "demoSG", {
+      vpc: demoVPC,
+      securityGroupName: "allow http traffic",
+      allowAllOutbound: true,
+    });
+
+    demoSG.addIngressRule(
+      ec2.Peer.anyIpv4(),
+      ec2.Port.tcp(80),
+      "allow http traffic",
+    );
   }
 }
