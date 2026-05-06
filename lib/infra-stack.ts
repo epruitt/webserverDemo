@@ -26,5 +26,20 @@ export class InfraStack extends cdk.Stack {
       ec2.Port.tcp(80),
       "allow http traffic",
     );
+
+    //ec2 instance
+    const demoEC2 = new ec2.Instance(this, "demoEC2", {
+      vpc: demoVPC,
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      securityGroup: demoSG,
+      instanceType: ec2.InstanceType.of(
+        ec2.InstanceClass.T2,
+        ec2.InstanceSize.MICRO,
+      ),
+      machineImage: ec2.MachineImage.latestAmazonLinux({
+        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+      }),
+      keyName: "demoKey",
+    });
   }
 }
