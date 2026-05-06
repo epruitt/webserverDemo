@@ -1,6 +1,7 @@
 import * as cdk from "aws-cdk-lib/core";
 import { Construct } from "constructs";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
+import { readFileSync } from "fs";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class InfraStack extends cdk.Stack {
@@ -36,10 +37,14 @@ export class InfraStack extends cdk.Stack {
         ec2.InstanceClass.T2,
         ec2.InstanceSize.MICRO,
       ),
-      machineImage: ec2.MachineImage.latestAmazonLinux({
+      machineImage: new ec2.AmazonLinuxImage({
         generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
       }),
       keyName: "demoKey",
     });
+
+    //user data
+    const userData = readFileSync("./lib/userData.sh", "utf8");
+    demoEC2.addUserData(userData);
   }
 }
