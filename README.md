@@ -1,4 +1,3 @@
-```md
 # AWS VPC Infrastructure Setup (CDK)
 
 This project demonstrates how to build a foundational AWS networking environment using the AWS Cloud Development Kit (CDK). It walks through creating a secure and scalable Virtual Private Cloud (VPC) along with the necessary components to host a publicly accessible web server.
@@ -25,4 +24,3 @@ Finally, an EC2 instance is launched and configured with user data to automatica
 ## Purpose
 
 This project provides a practical example of building a basic AWS network infrastructure using infrastructure as code (IaC) principles. It is ideal for learning core networking concepts and preparing for real-world cloud architecture scenarios.
-```
